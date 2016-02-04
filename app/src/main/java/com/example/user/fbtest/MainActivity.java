@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btnFBLogin.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
         callbackManager = CallbackManager.Factory.create();
 //callback??
-        LoginManager.getInstance().registerCallback(callbackManager,
+        btnFBLogin.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
