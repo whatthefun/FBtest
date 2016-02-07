@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
         btnFBLogin = (LoginButton) findViewById(R.id.btnFBLogin);
-        btnFBLogin.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
+        btnFBLogin.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));//下載時，顯示的權限請求
         callbackManager = CallbackManager.Factory.create();
         btnFBLogin.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -49,27 +49,23 @@ public class MainActivity extends AppCompatActivity {
                                     public void onCompleted(
                                             JSONObject object,
                                             GraphResponse response) {
-//                                        String str[] = new String[4];
-//                                        str[0] = object.optString("name");
-//                                        str[1] = object.optString("gender");
-//                                        str[2] = object.optString("email");
-//                                        str[3] = object.optString("birthday");
+                                        String str[] = new String[4];
+                                        str[0] = object.optString("name");
+                                        str[1] = object.optString("gender");
+                                        str[2] = object.optString("email");
+                                        str[3] = object.optString("birthday");
 
-                                        Intent intent = new Intent();
+                                        Intent intent = new Intent();//利用intent切換activity
                                         intent.setClass(MainActivity.this, Information.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("name", object.optString("name"));
-                                        bundle.putString("gender", object.optString("gender"));
-                                        bundle.putString("email", object.optString("email"));
-                                        bundle.putString("birthday", object.optString("birthday"));
-
+                                        Bundle bundle = new Bundle();//利用bundle夾帶資料
+                                        bundle.putStringArray("info", str);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                         Log.e("LoginActivity", object.toString());
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "name, email, gender, birthday");
+                        parameters.putString("fields", "name, email, gender, birthday");//拿取登入者特定資料
                         request.setParameters(parameters);
                         request.executeAsync();
                     }
