@@ -10,6 +10,10 @@ import android.widget.TextView;
 public class Information extends AppCompatActivity {
     private TextView txtName, txtGender, txtBirthday, txtEmail;
     private String info[] = new String[4];
+    private final static int NAME       = 0;
+    private final static int GENDER     = 1;
+    private final static int EMAIL       = 2;
+    private final static int BIRTHDAY   = 3;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +26,10 @@ public class Information extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();//利用bundle拿取夾帶資料
         info = bundle.getStringArray("info");
 
-        txtName.setText("Name:" + info[0]);
-        txtGender.setText("Gender:" + info[1]);
-        txtBirthday.setText("Birthday:" + info[3]);
-        txtEmail.setText("Email:\n" + info[2]);
+        txtName.setText("Name:" + info[NAME]);
+        txtGender.setText("Gender:" + info[GENDER]);
+        txtBirthday.setText("Birthday:" + info[BIRTHDAY]);
+        txtEmail.setText("Email:\n" + info[EMAIL]);
 
     }
 }
